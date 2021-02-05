@@ -1,18 +1,22 @@
 <template>
   <div id="app">
+
     <div class="modal" v-if="modal === true">
-      <div class="modal-title-container">
-        <div class="modal-title">
-          <h1>Règles</h1>
+      <div class="modal-body">
+        <div class="modal-title-container">
+          <div class="modal-title">
+            <h1>Règles</h1>
+          </div>
+        </div>
+        <div class="modal-image-container">
+          <img src="./assets/images/image-rules.svg" alt="">
+        </div>
+        <div class="close" @click="showModal()">
+          <p>+</p>
         </div>
       </div>
-      <div class="modal-image-container">
-        <img src="./assets/images/image-rules.svg" alt="">
-      </div>
-      <div class="close" @click="showModal()">
-        <p>+</p>
-      </div>
     </div>
+
     <header class="header">
       <div class="title-container">
         <h1>Pierre <br> Papier <br> Ciseaux</h1>
@@ -41,6 +45,7 @@
       </div>
     </div>
     <div class="tabletop-results" v-show="showResult === true">
+
       <div class="show-results-container">
         <div class="player-choice">
             <div :class="{waving: valueResult === 'Gagné'}" class="button-choice-container rock" @click.prevent.stop v-if="valuePlayer === 'rock'" >
@@ -62,35 +67,36 @@
             <p>Votre choix</p>
           </div>
         </div>
+
         <div class="house-choice">
           <div class="dark-background"></div>
           <transition name="house-choice">
-            <div :class="{waving: valueResult === 'Perdu'}" class="button-choice-container rock" @click.prevent.stop v-if="valueHouse === 'rock' && showResult === true">
+            <div  class="button-choice-container rock" @click.prevent.stop v-if="valueHouse === 'rock' && showResult === true">
               <buttonChoice>
                 <img src="./assets/images/icon-rock.svg" alt="Rock">
               </buttonChoice>
             </div>
           </transition>
           <transition name="house-choice">
-            <div :class="{waving: valueResult === 'Perdu'}" class="button-choice-container paper" @click.prevent.stop v-if="valueHouse === 'paper'  && showResult === true">
+            <div  class="button-choice-container paper" @click.prevent.stop v-if="valueHouse === 'paper'  && showResult === true">
               <buttonChoice :value="'paper'">
                 <img src="./assets/images/icon-paper.svg" alt="Paper">
               </buttonChoice>
             </div>
           </transition>
           <transition name="house-choice">
-            <div :class="{waving: valueResult === 'Perdu'}" class="button-choice-container scissors" @click.prevent.stop v-if="valueHouse === 'scissors' && showResult === true">
+            <div  class="button-choice-container scissors" @click.prevent.stop v-if="valueHouse === 'scissors' && showResult === true">
               <buttonChoice :value="'scissors'">
                 <img src="./assets/images/icon-scissors.svg" alt="Scissors">
               </buttonChoice>
             </div>
           </transition>
-
           <div class="house-choice-text">
             <p>Choix ordinateur</p>
           </div>
         </div>
       </div>
+
       <transition name="results-fade">
         <div class="results-container" v-show="showResult">
             <div class="results-text">{{ valueResult }}</div>
@@ -99,6 +105,7 @@
             </div>
         </div>
       </transition>
+
     </div>
 
     <div class="rules-button-container">
@@ -266,7 +273,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     box-shadow: 0 -4px inset rgba(0,0,0,0.25);
     position: relative;
   }
@@ -333,12 +340,23 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    background: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    background: rgba(0,0,0,0.25);
+  }
+
+  .modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     padding: 30px;
+    background: white;
+    width: 100%;
+    height: 100%;
   }
 
   .modal-title-container{
@@ -479,5 +497,79 @@ export default {
   }
   .results-fade-leave-active{
     transition: 0s;
+  }
+  
+  @media only screen and (min-width: 600px ) {
+
+    .button-choice-container, .dark-background{
+      width: 130px;
+      height: 130px;
+    }
+
+    .modal-title{
+      font-size: 24px;
+    }
+
+    .tabletop{
+      gap: 40px 60px ;
+    }
+
+    .modal-body{
+      border-radius: 12px;
+      max-width: 580px;
+      max-height: 580px;
+    }
+    
+  }
+
+  @media only screen and (min-width: 1024px ) {
+
+    .title-container>h1{
+      font-size: 36px;
+    }
+
+    .score-title{
+      font-size: 20px;
+    }
+
+    .score{
+      font-size: 50px;
+    }
+
+    .score-container{
+      width: 150px;
+      height: 100px;
+    }
+
+    .button-choice-container, .dark-background{
+      width: 200px;
+      height: 200px;
+    }
+
+    .tabletop{
+      gap: 70px 100px ;
+    }
+
+    .rules-button-container{
+      justify-content: flex-end;
+    }
+
+    .player-choice-text, .house-choice-text{
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .show-results-container{
+      max-width: 600px;
+      margin-bottom: 100px;
+    }
+
+    .results-text{
+      font-size: 60px;
+    }
+
+    .results-button{
+      font-size: 24px;
+    }
   }
 </style>

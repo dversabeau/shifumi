@@ -52,4 +52,26 @@
     height: auto;
 }
 
+@media only screen and (min-width: 600px ) {
+
+    .image-container{
+        width: 40px;
+    }
+
+}
+
+@media only screen and (min-width: 1024px ) {
+
+    .button-choice{
+        width: calc(100% - 50px);
+        height: calc(100% - 50px);
+
+    }
+
+    .image-container{
+        width: 60px;
+    }
+
+}
+
 </style>
